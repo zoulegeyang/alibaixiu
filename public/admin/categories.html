@@ -30,15 +30,15 @@
       </div> -->
       <div class="row">
         <div class="col-md-4">
-          <form>
+          <form id='addcategory'>
             <h2>添加分类</h2>
             <div class="form-group">
               <label>名称</label>
-              <input class="form-control" type="text" placeholder="请输入分类名称">
+              <input class="form-control" type="text" placeholder="请输入分类名称" name="title">
             </div>
             <div class="form-group">
               <label>图标</label>
-              <input class="form-control" type="text" placeholder="请输入分类图标类名">
+              <input class="form-control" type="text" placeholder="请输入分类图标类名" name="className">
             </div>
             <div class="form-group">
               <button class="btn btn-primary" type="submit">添加</button>
@@ -128,5 +128,6 @@
   <script src="../assets/vendors/jquery/jquery.js"></script>
   <script src="../assets/vendors/bootstrap/js/bootstrap.js"></script>
   <script>NProgress.done()</script>
+  <script src="../assets/js/category.js"></script>
 </body>
 </html>

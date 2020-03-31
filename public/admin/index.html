@@ -1,3 +1,4 @@
+<!-- 用script 标签来获取isLogin这个变量,下面这个请求会的到"var isLogin=true或false" 使得下面的script标签可以获得到.  不用ajax是因为ajax是异步的.必须在进入这个页面之前进行判断.  -->
 <script src="/login/status"></script>
 <script>
   if (!isLogin) location.href = 'login.html';

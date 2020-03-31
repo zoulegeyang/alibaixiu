@@ -92,3 +92,75 @@ $('#modifyBox').on('submit', '#modifyForm', function () {
 	// 阻止表单默认提交
 	return false;
 });
+
+//为列表添加删除事件
+$('#userBox').on('click','.delete',function(){
+	// alert('shanchu')
+	if(confirm('确认删除吗')){
+		var id=$(this).attr('data-id')
+		$.ajax({
+			type:'delete',
+			url:'/users/'+id,
+			success(){
+				location.reload()
+			}
+		})
+	}
+})
+
+//实现全选功能
+var selectAll=document.querySelector('.selectAll')
+//根据全选的状态改变其它按钮的状态.
+$(selectAll).on('click',function(){
+	var status=$(this).prop('checked');
+	if(status){
+		$('.userStatus').prop('checked',true) //让其它按钮也选中
+		$('.deleteAll').show() //让批量删除按钮显示
+	}else{
+		$('.userStatus').prop('checked',false)
+		$('.deleteAll').hide()
+
+
+	}
+})
+//根据其它按钮的状态改变全选的状态
+$('#userBox').on('change','.userStatus',function(){
+	var inputs=$('.userStatus') 
+	console.log(inputs)
+	if(inputs.length==inputs.filter(':checked').length){
+		// alert('xuanzhong')
+		console.log(inputs.length,inputs.filter(':checked').length)
+		$(selectAll).prop('checked',true)
+	}else{
+		// alert('fou')
+		$(selectAll).prop('checked',false)
+
+	}
+	if(inputs.filter(':checked').length>0){
+		$('.deleteAll').show() //让批量删除按钮显示
+	}else{
+		$('.deleteAll').hide()
+	}
+})
+
+//删除用户
+$('.deleteAll').on('click',function(){
+	var inputs=$('.userStatus').filter(':checked')
+	var ids=[];
+	
+	inputs.each(function(index,item){
+		var id=$(item).attr('data-id');
+		ids.push(id);
+	})
+	console.log(ids)
+	if(confirm('你确定要删除吗')){
+		$.ajax({
+			type:'delete',
+			url:'/users/'+ids.join('-'),
+			success(){
+				location.reload()
+			}
+		})
+	}
+	
+})
